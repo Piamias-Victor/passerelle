@@ -1,0 +1,6 @@
+2025-06-30 13:34:44 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-06-30 13:34:45 [INFO]: Starting ID passerelle: 902304
+2025-06-30 13:34:45 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-06-30 13:34:45 [ERROR]: Erreur lors de la génération ou de l'envoi du XML : Cannot read properties of undefined (reading 'lignevente')
+2025-06-30 13:34:45 [INFO]: Déconnexion de Prisma Client.
+2025-06-30 13:34:45 [INFO]: Script terminé.
