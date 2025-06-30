@@ -166,25 +166,34 @@ const mapPrismaOrdersToWinpharma = (orders: PrismaOrder[], uuidMapper: UuidToInt
     logger.info(`Delivery Address: ${deliveryAddress.rue1}, ${deliveryAddress.ville}`);
 
     // Mapper les lignes de produits normales
-    const productLines = order.lines.map(line => ({
-      product_reference: line.product.ean13 || "",
-      product_name: line.product.name || "",
-      product_quantity: line.expectedQuantity,
-      unit_price_tax_incl: line.priceWithoutTax instanceof Decimal 
+    const productLines = order.lines.map(line => {
+      const priceHT = line.priceWithoutTax instanceof Decimal 
         ? line.priceWithoutTax.toNumber()
-        : line.priceWithoutTax,
-      rate: line.percentTaxRate instanceof Decimal 
+        : line.priceWithoutTax;
+      
+      const taxRate = line.percentTaxRate instanceof Decimal 
         ? line.percentTaxRate.toNumber()
-        : line.percentTaxRate,
-      specific_price: line.promotion
-        ? {
-            reduction: line.promotion.amount instanceof Decimal 
-              ? line.promotion.amount.toNumber()
-              : line.promotion.amount,
-            reduction_type: line.promotion.type,
-          }
-        : undefined,
-    }));
+        : line.percentTaxRate;
+      
+      // Convertir le prix HT en TTC (prix stocké en centimes)
+      const priceTTC = priceHT * (1 + taxRate / 100);
+      
+      return {
+        product_reference: line.product.ean13 || "",
+        product_name: line.product.name || "",
+        product_quantity: line.expectedQuantity,
+        unit_price_tax_incl: priceTTC, // Prix TTC en centimes
+        rate: taxRate,
+        specific_price: line.promotion
+          ? {
+              reduction: line.promotion.amount instanceof Decimal 
+                ? line.promotion.amount.toNumber()
+                : line.promotion.amount,
+              reduction_type: line.promotion.type,
+            }
+          : undefined,
+      };
+    });
 
     // Récupérer le prix de livraison (déjà en centimes dans la DB)
     const deliveryPrice = order.deliveries && order.deliveries.length > 0 
@@ -193,13 +202,16 @@ const mapPrismaOrdersToWinpharma = (orders: PrismaOrder[], uuidMapper: UuidToInt
           : order.deliveries[0].price)
       : 0;
 
-    logger.info(`Delivery price for order ${order.uuid}: ${deliveryPrice} centimes`);
+    logger.info(`Delivery price HT for order ${order.uuid}: ${deliveryPrice} centimes`);
+    logger.info(`Delivery price TTC for order ${order.uuid}: ${deliveryPrice * 1.20} centimes`);
 
     // Ajouter la ligne frais de port avec le code 270623
+    const deliveryPriceTTC = deliveryPrice * 1.20; // Convertir les frais de port HT en TTC (TVA 20%)
+    
     const shippingLine = {
       product_reference: "270623",
       product_name: "Frais de port",
-      product_quantity: deliveryPrice, // Quantité = prix en centimes
+      product_quantity: deliveryPriceTTC, // Quantité = prix TTC en centimes
       unit_price_tax_incl: 1, // 1 centime (0.01€ mais stocké en centimes = 1)
       rate: 20.00, // TVA 20%
       specific_price: undefined,
