@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<beldemande date="2025-06-30" version="1.1" type="SUCCESS">
+  <infact>
+    <vente num_pharma="302004015" numero_vente="902303">
+      <client client_id="902303">
+        <nom>Crespon</nom>
+        <prenom>Sylvie</prenom>
+        <datenaissance>1970-01-01</datenaissance>
+        <adresse_facturation>
+          <rue1>960 route departementale 228</rue1>
+          <rue2/>
+          <codepostal>07570</codepostal>
+          <ville>Labatie d Andaure</ville>
+          <pays>FRANCE</pays>
+          <tel>0661838059</tel>
+          <portable>0123456789</portable>
+          <email>cres.sylvie@hotmail.com</email>
+        </adresse_facturation>
+      </client>
+      <date_vente>2025-06-30</date_vente>
+      <lignevente>
+        <codeproduit>3273816860152</codeproduit>
+        <designation_produit>Neutraderm Gel Douche Surgras Dermo-Protecteur 1 L</designation_produit>
+        <quantite>1</quantite>
+        <prix_brut>5.50</prix_brut>
+        <remise>0.00</remise>
+        <prix_net>5.50</prix_net>
+        <tauxtva>20.00</tauxtva>
+      </lignevente>
+      <lignevente>
+        <codeproduit>3700111400351</codeproduit>
+        <designation_produit>Ccd Bactigyn- Ovules Equilibre Intime, 7 Ovules Vaginaux</designation_produit>
+        <quantite>2</quantite>
+        <prix_brut>11.90</prix_brut>
+        <remise>0.00</remise>
+        <prix_net>11.90</prix_net>
+        <tauxtva>20.00</tauxtva>
+      </lignevente>
+      <lignevente>
+        <codeproduit>3331300098259</codeproduit>
+        <designation_produit>Replens Traitement odeurs vaginales 3 unidoses de 7.8g</designation_produit>
+        <quantite>1</quantite>
+        <prix_brut>8.99</prix_brut>
+        <remise>0.00</remise>
+        <prix_net>8.99</prix_net>
+        <tauxtva>20.00</tauxtva>
+      </lignevente>
+      <lignevente>
+        <codeproduit>3401095384223</codeproduit>
+        <designation_produit>Replens gel vaginal</designation_produit>
+        <quantite>1</quantite>
+        <prix_brut>12.99</prix_brut>
+        <remise>0.00</remise>
+        <prix_net>12.99</prix_net>
+        <tauxtva>20.00</tauxtva>
+      </lignevente>
+    </vente>
+  </infact>
+</beldemande>

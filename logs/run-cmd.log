@@ -1,0 +1,8 @@
+2025-01-02 09:53:14 [INFO]: Récupération du max id_passerelle depuis Prisma...
+2025-01-02 09:53:15 [INFO]: Starting ID passerelle: 70034
+2025-01-02 09:53:15 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-01-02 09:53:15 [INFO]: Nombre de commandes récupérées : 0
+2025-01-02 09:53:15 [INFO]: Aucune commande à exporter.
+2025-01-02 09:53:15 [INFO]: Déconnexion de Prisma Client.
+2025-01-02 09:53:15 [INFO]: Script terminé.
+2025-01-02 09:53:15 [INFO]: run-cmd.sh exécuté avec succès.

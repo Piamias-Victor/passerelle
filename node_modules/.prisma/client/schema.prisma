@@ -1,0 +1,459 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  binaryTargets   = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Notice {
+  productUuid String @id
+  url         String
+
+  product Product? @relation("ProductNotice", fields: [productUuid], references: [uuid])
+
+  @@map("notices")
+}
+
+model Product {
+  uuid                String        @id
+  availableStock      Int           @map("available_stock")
+  name                String
+  miniatureHash       String?       @map("miniature_hash")
+  cip7                String?       @unique
+  cip13               String?       @unique
+  ean13               String        @unique
+  priceWithoutTax     Decimal       @map("price_without_tax") @db.Decimal(12, 2)
+  percentTaxRate      Decimal       @map("percent_tax_rate") @db.Decimal(5, 2)
+  laboratoryUuid      String?       @map("laboratory_uuid")
+  description         String?
+  instructionsForUse  String?       @map("instructions_for_use")
+  composition         String?
+  weight              Int
+  maxQuantityForOrder Int?          @map("max_quantity_for_order")
+  status              ProductStatus
+  createdAt           DateTime      @map("created_at")
+  createdBy           String        @map("created_by")
+  updatedAt           DateTime      @map("updated_at")
+  updatedBy           String        @map("updated_by")
+
+  promotions ProductPromotion[]
+  orderLines OrderLine[]
+  images     ProductImage[]
+  miniature  Image?             @relation("ProductMiniature", fields: [miniatureHash], references: [hash])
+  categories ProductCategory[]
+  laboratory Laboratory?        @relation(fields: [laboratoryUuid], references: [uuid])
+  locations  ProductLocation[]
+  notice     Notice?            @relation("ProductNotice")
+
+  @@map("products")
+}
+
+model Location {
+  uuid  String @id
+  name  String
+  order Int
+
+  productLocation ProductLocation[]
+
+  @@map("locations")
+}
+
+model ProductLocation {
+  locationUuid String @map("location_uuid")
+  productUuid  String @map("product_uuid")
+  value        String
+
+  location Location @relation(fields: [locationUuid], references: [uuid])
+  product  Product  @relation(fields: [productUuid], references: [uuid])
+
+  @@id([locationUuid, productUuid])
+  @@map("product_locations")
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model Image {
+  hash      String   @id
+  name      String
+  url       String   @unique
+  createdAt DateTime @map("created_at")
+  createdBy String   @map("created_by")
+  updatedAt DateTime @map("updated_at")
+  updatedBy String   @map("updated_by")
+
+  categoryImage       Category[]     @relation("CategoryImage")
+  categoryMiniature   Category[]     @relation("CategoryMiniature")
+  productImage        ProductImage[]
+  productMiniature    Product[]      @relation("ProductMiniature")
+  laboratoryImage     Laboratory[]   @relation("LaboratoryImage")
+  laboratoryMiniature Laboratory[]   @relation("LaboratoryMiniature")
+  bannerImage         Banner[]       @relation("BannerImage")
+
+  @@map("images")
+}
+
+model ProductImage {
+  imageHash   String @map("image_hash")
+  productUuid String @map("product_uuid")
+
+  product Product? @relation(fields: [productUuid], references: [uuid])
+  image   Image    @relation(fields: [imageHash], references: [hash])
+
+  @@id([productUuid, imageHash])
+  @@map("product_images")
+}
+
+model Category {
+  uuid          String   @id
+  name          String
+  description   String?
+  parentUuid    String?  @map("parent_uuid")
+  miniatureHash String?  @map("miniature_hash")
+  imageHash     String?  @map("image_hash")
+  createdAt     DateTime @map("created_at")
+  createdBy     String   @map("created_by")
+  updatedAt     DateTime @map("updated_at")
+  updatedBy     String   @map("updated_by")
+
+  productCategory ProductCategory[]
+  parent          Category?         @relation("CategoryToParent", fields: [parentUuid], references: [uuid])
+  children        Category[]        @relation("CategoryToParent")
+  image           Image?            @relation("CategoryImage", fields: [imageHash], references: [hash])
+  miniature       Image?            @relation("CategoryMiniature", fields: [miniatureHash], references: [hash])
+
+  @@map("categories")
+}
+
+enum ReductionType {
+  FIXED
+  PERCENTAGE
+}
+
+model Promotion {
+  uuid      String        @id
+  amount    Decimal       @db.Decimal(12, 2)
+  type      ReductionType
+  name      String?
+  startDate DateTime?     @map("start_date")
+  endDate   DateTime?     @map("end_date")
+  createdAt DateTime      @map("created_at")
+  createdBy String        @map("created_by")
+  updatedAt DateTime      @map("updated_at")
+  updatedBy String        @map("updated_by")
+
+  products   ProductPromotion[]
+  orderLines OrderLine[]
+
+  @@map("promotions")
+}
+
+model ProductCategory {
+  categoryUuid String @map("category_uuid")
+  productUuid  String @map("product_uuid")
+
+  category Category @relation(fields: [categoryUuid], references: [uuid], onUpdate: Cascade, onDelete: Cascade)
+  product  Product  @relation(fields: [productUuid], references: [uuid], onUpdate: Cascade, onDelete: Cascade)
+
+  @@id([productUuid, categoryUuid])
+  @@map("product_categories")
+}
+
+model ProductPromotion {
+  productUuid   String @map("product_uuid")
+  promotionUuid String @map("promotion_uuid")
+
+  product   Product   @relation(fields: [productUuid], references: [uuid], onUpdate: Cascade, onDelete: Cascade)
+  promotion Promotion @relation(fields: [promotionUuid], references: [uuid], onUpdate: Cascade, onDelete: Cascade)
+
+  @@id([productUuid, promotionUuid])
+  @@map("product_promotions")
+}
+
+enum DeliveryMethodType {
+  CLICKANDCOLLECT
+  DELIVERY
+}
+
+model DeliveryMethod {
+  uuid        String             @id
+  name        String
+  description String
+  priceRanges Json
+  type        DeliveryMethodType
+  createdAt   DateTime           @map("created_at")
+  createdBy   String             @map("created_by")
+  updatedAt   DateTime           @map("updated_at")
+  updatedBy   String             @map("updated_by")
+
+  deliveries Delivery[] @relation("deliveryMethod")
+
+  @@map("delivery_methods")
+}
+
+enum DeliveryDirection {
+  FORWARD
+  RETURN
+}
+
+enum DeliveryStatus {
+  CREATED
+  PREPARED
+  SHIPPED
+  DELIVERED
+  CANCELED
+}
+
+model Delivery {
+  uuid                String            @id
+  orderUuid           String            @map("order_uuid")
+  price               Decimal           @db.Decimal(12, 2)
+  pickupId            String?           @map("pickup_id")
+  pickingDate         DateTime?         @map("picking_date")
+  trackingNumber      String?           @map("tracking_number")
+  direction           DeliveryDirection
+  weight              Int
+  status              DeliveryStatus
+  methodUuid          String            @map("method_uuid")
+  senderAddressUuid   String            @map("sender_address_uuid")
+  senderPhoneUuid     String            @map("sender_phone_uuid")
+  senderEmailUuid     String            @map("sender_email_uuid")
+  receiverAddressUuid String            @map("receiver_address_uuid")
+  receiverPhoneUuid   String            @map("receiver_phone_uuid")
+  receiverEmailUuid   String            @map("receiver_email_uuid")
+  data                Bytes?
+
+  method          DeliveryMethod @relation("deliveryMethod", fields: [methodUuid], references: [uuid])
+  senderAddress   Media          @relation("deliverySenderAddress", fields: [senderAddressUuid], references: [uuid])
+  senderPhone     Media          @relation("deliverySenderPhone", fields: [senderPhoneUuid], references: [uuid])
+  senderEmail     Media          @relation("deliverySenderEmail", fields: [senderEmailUuid], references: [uuid])
+  receiverAddress Media          @relation("deliveryReceiverAddress", fields: [receiverAddressUuid], references: [uuid])
+  receiverPhone   Media          @relation("deliveryReceiverPhone", fields: [receiverPhoneUuid], references: [uuid])
+  receiverEmail   Media          @relation("deliveryReceiverEmail", fields: [receiverEmailUuid], references: [uuid])
+  createdAt       DateTime       @map("created_at")
+  createdBy       String         @map("created_by")
+  updatedAt       DateTime       @map("updated_at")
+  updatedBy       String         @map("updated_by")
+
+  order Order @relation(fields: [orderUuid], references: [uuid])
+
+  @@map("deliveries")
+}
+
+enum PaymentStatus {
+  WAITINGFORPAYMENT
+  PAYED
+  REJECTED
+}
+
+model Payment {
+  uuid      String        @id
+  orderUuid String        @unique @map("order_uuid")
+  amount    Decimal       @db.Decimal(12, 2)
+  status    PaymentStatus
+  createdAt DateTime      @map("created_at")
+  createdBy String        @map("created_by")
+  updatedAt DateTime      @map("updated_at")
+  updatedBy String        @map("updated_by")
+
+  order Order @relation(fields: [orderUuid], references: [uuid])
+
+  @@map("payments")
+}
+
+enum OrderLineStatus {
+  CREATED
+  STARTED
+  PREPARED
+  CANCELED
+}
+
+model OrderLine {
+  productUuid      String          @map("product_uuid")
+  orderUuid        String          @map("order_uuid")
+  priceWithoutTax  Decimal         @map("price_without_tax") @db.Decimal(12, 2)
+  percentTaxRate   Decimal         @map("percent_tax_rate") @db.Decimal(5, 2)
+  expectedQuantity Int             @map("expected_quantity")
+  preparedQuantity Int             @map("prepared_quantity")
+  promotionUuid    String?         @map("promotion_uuid")
+  status           OrderLineStatus
+  createdAt        DateTime        @map("created_at")
+  createdBy        String          @map("created_by")
+  updatedAt        DateTime        @map("updated_at")
+  updatedBy        String          @map("updated_by")
+
+  product   Product    @relation(fields: [productUuid], references: [uuid])
+  order     Order      @relation(fields: [orderUuid], references: [uuid])
+  promotion Promotion? @relation(fields: [promotionUuid], references: [uuid])
+
+  @@id([orderUuid, productUuid, createdAt])
+  @@map("order_lines")
+}
+
+enum MediaType {
+  Address
+  Phone
+  Email
+}
+
+model Media {
+  uuid String    @id @default(uuid())
+  data Json
+  type MediaType
+  name String?
+
+  deliveryOrder Order[] @relation("deliveryAddressOrder")
+  billingOrder  Order[] @relation("billingAddressOrder")
+  phoneOrder    Order[] @relation("phoneOrder")
+  emailOrder    Order[] @relation("emailOrder")
+
+  deliverySenderAddress Delivery[] @relation("deliverySenderAddress")
+  deliverySenderPhone   Delivery[] @relation("deliverySenderPhone")
+  deliverySenderEmail   Delivery[] @relation("deliverySenderEmail")
+
+  deliveryReceiverAddress Delivery[] @relation("deliveryReceiverAddress")
+  deliveryReceiverPhone   Delivery[] @relation("deliveryReceiverPhone")
+  deliveryReceiverEmail   Delivery[] @relation("deliveryReceiverEmail")
+
+  customerAddress Customer[] @relation("customerAddress")
+  customerPhone   Customer[] @relation("customerPhone")
+
+  @@map("medias")
+}
+
+model Order {
+  uuid                String   @id
+  deliveryAddressUuid String   @map("delivery_address_uuid")
+  billingAddressUuid  String   @map("billing_address_uuid")
+  phoneUuid           String   @map("phone_uuid")
+  emailUuid           String   @map("email_uuid")
+  idPasserelle        Int?     @unique @map("id_passerelle")
+  customerUuid        String?  @map("customer_uuid")
+  customerMessage     String?  @map("customer_message")
+  createdAt           DateTime @map("created_at")
+  createdBy           String   @map("created_by")
+  updatedAt           DateTime @map("updated_at")
+  updatedBy           String   @map("updated_by")
+
+  lines           OrderLine[]
+  deliveryAddress Media       @relation("deliveryAddressOrder", fields: [deliveryAddressUuid], references: [uuid])
+  billingAddress  Media       @relation("billingAddressOrder", fields: [billingAddressUuid], references: [uuid])
+  phone           Media       @relation("phoneOrder", fields: [phoneUuid], references: [uuid])
+  email           Media       @relation("emailOrder", fields: [emailUuid], references: [uuid])
+  payment         Payment?
+  messages        Message[]
+  deliveries      Delivery[]
+  customer        Customer?   @relation("customerOrders", fields: [customerUuid], references: [uuid])
+  invoice         Invoice?    @relation("orderInvoice")
+
+  @@map("orders")
+}
+
+model Laboratory {
+  uuid          String   @id
+  name          String
+  description   String?
+  imageHash     String?  @map("image_hash")
+  miniatureHash String?  @map("miniature_hash")
+  createdAt     DateTime @map("created_at")
+  createdBy     String   @map("created_by")
+  updatedAt     DateTime @map("updated_at")
+  updatedBy     String   @map("updated_by")
+
+  product   Product[]
+  image     Image?    @relation("LaboratoryImage", fields: [imageHash], references: [hash])
+  miniature Image?    @relation("LaboratoryMiniature", fields: [miniatureHash], references: [hash])
+
+  @@map("laboratories")
+}
+
+enum MessageType {
+  PREPARATION_MESSAGE
+  ORDER_MESSAGE
+}
+
+enum MessageStatus {
+  CREATED
+  SENT
+  SEND_ERROR
+}
+
+model Message {
+  uuid   String        @id
+  data   Json
+  type   MessageType
+  status MessageStatus
+
+  orderUuid String? @map("order_uuid")
+  order     Order?  @relation(fields: [orderUuid], references: [uuid])
+
+  createdAt DateTime @map("created_at")
+  createdBy String   @map("created_by")
+  updatedAt DateTime @map("updated_at")
+  updatedBy String   @map("updated_by")
+
+  @@map("messages")
+}
+
+model Customer {
+  uuid        String  @id
+  email       String  @unique
+  phoneUuid   String?
+  firstname   String?
+  lastname    String?
+  addressUuid String?
+
+  phone   Media? @relation("customerPhone", fields: [phoneUuid], references: [uuid])
+  address Media? @relation("customerAddress", fields: [addressUuid], references: [uuid])
+
+  orders Order[] @relation("customerOrders")
+
+  @@map("customers")
+}
+
+model Invoice {
+  invoiceNumber String   @id
+  orderUuid     String   @unique
+  data          Json
+  createdAt     DateTime @map("created_at")
+  createdBy     String   @map("created_by")
+
+  order Order @relation("orderInvoice", fields: [orderUuid], references: [uuid])
+
+  @@map("invoices")
+}
+
+model Token {
+  name   String
+  value  Int    @default(0)
+  year   Int
+  format String
+
+  @@id([name, year])
+  @@map("tokens")
+}
+
+model Banner {
+  uuid      String    @id
+  imageHash String    @map("image_hash")
+  order     Int
+  isActive  Boolean   @default(true) @map("is_active")
+  href      String?
+  startDate DateTime? @map("start_date")
+  endDate   DateTime? @map("end_date")
+  createdAt DateTime  @map("created_at")
+  createdBy String    @map("created_by")
+  updatedAt DateTime  @map("updated_at")
+  updatedBy String    @map("updated_by")
+
+  image Image @relation("BannerImage", fields: [imageHash], references: [hash], onDelete: Cascade)
+
+  @@map("banners")
+}
