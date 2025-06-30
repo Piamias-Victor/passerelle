@@ -23,6 +23,32 @@ export interface Customer {
 }
 
 /**
+ * Type pour les commandes Prisma avec toutes les relations
+ */
+type PrismaOrder = {
+  uuid: string;
+  createdAt: Date;
+  deliveryAddress: { data: any } | null;
+  billingAddress: { data: any } | null;
+  phone: { data: any } | null;
+  email: { data: any } | null;
+  deliveries: { price: Decimal | number }[];
+  lines: Array<{
+    expectedQuantity: number;
+    priceWithoutTax: Decimal | number;
+    percentTaxRate: Decimal | number;
+    product: {
+      ean13: string | null;
+      name: string | null;
+    };
+    promotion: {
+      amount: Decimal | number;
+      type: string;
+    } | null;
+  }>;
+};
+
+/**
  * Fonction pour récupérer et mapper les commandes sans idPasserelle
  * @param uuidMapper Instance de UuidToIntMapper
  * @returns Tableau de WinpharmaOrder
@@ -47,6 +73,7 @@ export const getOrdersToExport = async (uuidMapper: UuidToIntMapper): Promise<Wi
       billingAddress: true,
       phone: true,
       email: true,
+      deliveries: true, // Inclure les livraisons pour récupérer le prix
       lines: {
         include: {
           product: true,
@@ -56,7 +83,25 @@ export const getOrdersToExport = async (uuidMapper: UuidToIntMapper): Promise<Wi
     },
   });
 
-  const mappedOrders: WinpharmaOrder[] = orders.map(order => {
+  const mappedOrders = mapPrismaOrdersToWinpharma(orders, uuidMapper);
+  return mappedOrders;
+};
+
+/**
+ * Fonction pour mapper les commandes Prisma vers le format Winpharma
+ * @param orders Commandes Prisma
+ * @param uuidMapper Instance de UuidToIntMapper
+ * @returns Tableau de WinpharmaOrder
+ */
+const mapPrismaOrdersToWinpharma = (orders: PrismaOrder[], uuidMapper: UuidToIntMapper): WinpharmaOrder[] => {
+  const logger = winston.createLogger({
+    level: 'info',
+    transports: [
+      new winston.transports.Console(),
+    ],
+  });
+
+  const mappedOrders = orders.map(order => {
     const billingData = order.billingAddress?.data as {
       zip: string;
       city: string;
@@ -120,34 +165,61 @@ export const getOrdersToExport = async (uuidMapper: UuidToIntMapper): Promise<Wi
     logger.info(`Billing Address: ${billingAddress.rue1}, ${billingAddress.ville}`);
     logger.info(`Delivery Address: ${deliveryAddress.rue1}, ${deliveryAddress.ville}`);
 
+    // Mapper les lignes de produits normales
+    const productLines = order.lines.map(line => ({
+      product_reference: line.product.ean13 || "",
+      product_name: line.product.name || "",
+      product_quantity: line.expectedQuantity,
+      unit_price_tax_incl: line.priceWithoutTax instanceof Decimal 
+        ? line.priceWithoutTax.toNumber()
+        : line.priceWithoutTax,
+      rate: line.percentTaxRate instanceof Decimal 
+        ? line.percentTaxRate.toNumber()
+        : line.percentTaxRate,
+      specific_price: line.promotion
+        ? {
+            reduction: line.promotion.amount instanceof Decimal 
+              ? line.promotion.amount.toNumber()
+              : line.promotion.amount,
+            reduction_type: line.promotion.type,
+          }
+        : undefined,
+    }));
+
+    // Récupérer le prix de livraison (déjà en centimes dans la DB)
+    const deliveryPrice = order.deliveries && order.deliveries.length > 0 
+      ? (order.deliveries[0].price instanceof Decimal 
+          ? order.deliveries[0].price.toNumber() 
+          : order.deliveries[0].price)
+      : 0;
+
+    logger.info(`Delivery price for order ${order.uuid}: ${deliveryPrice} centimes`);
+
+    // Ajouter la ligne frais de port avec le code 270623
+    const shippingLine = {
+      product_reference: "270623",
+      product_name: "Frais de port",
+      product_quantity: deliveryPrice, // Quantité = prix en centimes
+      unit_price_tax_incl: 1, // 1 centime (0.01€ mais stocké en centimes = 1)
+      rate: 20.00, // TVA 20%
+      specific_price: undefined,
+    };
+
+    // Combiner les lignes de produits + ligne frais de port
+    const allLines = [...productLines, shippingLine];
+
+    logger.info(`Total lines for order ${order.uuid}: ${allLines.length} (${productLines.length} produits + 1 frais de port)`);
+
     return {
       numero_vente: uuidMapper.getInt(order.uuid),
       client_id: uuidMapper.getInt(order.uuid),
-      uuid: order.uuid, // <-- Ajoutez cette ligne
+      uuid: order.uuid,
       nom: customer.lastname,
       prenom: customer.firstname,
       datenaissance: customer.birthday,
       adresse_facturation: billingAddress,
       date_vente: order.createdAt.toISOString().split('T')[0],
-      lignevente: order.lines.map(line => ({
-        product_reference: line.product.ean13 || "",
-        product_name: line.product.name || "",
-        product_quantity: line.expectedQuantity,
-        unit_price_tax_incl: line.priceWithoutTax instanceof Decimal 
-          ? line.priceWithoutTax.toNumber() // ✅ Convertir en number
-          : line.priceWithoutTax,
-        rate: line.percentTaxRate instanceof Decimal 
-          ? line.percentTaxRate.toNumber() // ✅ Convertir en number
-          : line.percentTaxRate,
-        specific_price: line.promotion
-          ? {
-              reduction: line.promotion.amount instanceof Decimal 
-                ? line.promotion.amount.toNumber() // ✅ Convertir en number
-                : line.promotion.amount,
-              reduction_type: line.promotion.type,
-            }
-          : undefined,
-      })),
+      lignevente: allLines,
     };
   });
 
