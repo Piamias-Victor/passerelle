@@ -4,3 +4,171 @@
 2025-06-30 13:34:45 [ERROR]: Erreur lors de la génération ou de l'envoi du XML : Cannot read properties of undefined (reading 'lignevente')
 2025-06-30 13:34:45 [INFO]: Déconnexion de Prisma Client.
 2025-06-30 13:34:45 [INFO]: Script terminé.
+2025-06-30 15:09:29 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-06-30 15:09:30 [INFO]: Starting ID passerelle: 902304
+2025-06-30 15:09:30 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-06-30 15:09:31 [INFO]: [object Object]
+2025-06-30 15:09:31 [INFO]: Nombre de commandes récupérées : 2
+2025-06-30 15:09:31 [INFO]: Génération du fichier XML...
+2025-06-30 15:09:31 [INFO]: dasn cmd exportedOrders :
+2025-06-30 15:09:31 [INFO]: Fichier XML généré et enregistré à : /Users/victorpiamias/Desktop/Dev/winPasserelle/src/exports/orders-export.xml
+2025-06-30 15:09:31 [INFO]: Compression et encodage du fichier XML...
+2025-06-30 15:09:31 [INFO]: Envoi du fichier XML à Winpharma...
+2025-06-30 15:09:31 [INFO]: URL d'envoi: https://sec.winpharma.com/webpasserelle/demande/
+2025-06-30 15:09:32 [INFO]: XML envoyé avec succès à Winpharma.
+2025-06-30 15:09:32 [INFO]: Assigning idPasserelle 902304 to order UUID cff630e9-304d-466e-ad9a-8aafa0b92e44
+2025-06-30 15:09:32 [INFO]: Commande UUID cff630e9-304d-466e-ad9a-8aafa0b92e44 mise à jour avec idPasserelle 902304.
+2025-06-30 15:09:32 [INFO]: Assigning idPasserelle 902305 to order UUID 64fdc867-a1bf-4ab1-b986-73bf77805f08
+2025-06-30 15:09:32 [INFO]: Commande UUID 64fdc867-a1bf-4ab1-b986-73bf77805f08 mise à jour avec idPasserelle 902305.
+2025-06-30 15:09:32 [INFO]: Déconnexion de Prisma Client.
+2025-06-30 15:09:32 [INFO]: Script terminé.
+2025-06-30 16:24:04 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-06-30 16:24:05 [INFO]: Starting ID passerelle: 902306
+2025-06-30 16:24:05 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-06-30 16:24:06 [INFO]: [object Object]
+2025-06-30 16:24:06 [INFO]: Nombre de commandes récupérées : 2
+2025-06-30 16:24:06 [INFO]: Génération du fichier XML...
+2025-06-30 16:24:06 [INFO]: dasn cmd exportedOrders :
+2025-06-30 16:24:06 [INFO]: Fichier XML généré et enregistré à : /Users/victorpiamias/Desktop/Dev/winPasserelle/src/exports/orders-export.xml
+2025-06-30 16:24:06 [INFO]: Compression et encodage du fichier XML...
+2025-06-30 16:24:06 [INFO]: Envoi du fichier XML à Winpharma...
+2025-06-30 16:24:06 [INFO]: URL d'envoi: https://sec.winpharma.com/webpasserelle/demande/
+2025-06-30 16:24:06 [INFO]: XML envoyé avec succès à Winpharma.
+2025-06-30 16:24:06 [INFO]: Assigning idPasserelle 902306 to order UUID e4640730-8f2f-49df-b753-93986dc6952c
+2025-06-30 16:24:07 [INFO]: Commande UUID e4640730-8f2f-49df-b753-93986dc6952c mise à jour avec idPasserelle 902306.
+2025-06-30 16:24:07 [INFO]: Assigning idPasserelle 902307 to order UUID 26615182-aad0-4109-91b5-e980aeb0892c
+2025-06-30 16:24:07 [INFO]: Commande UUID 26615182-aad0-4109-91b5-e980aeb0892c mise à jour avec idPasserelle 902307.
+2025-06-30 16:24:07 [INFO]: Déconnexion de Prisma Client.
+2025-06-30 16:24:07 [INFO]: Script terminé.
+2025-06-30 17:59:14 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-06-30 17:59:15 [INFO]: Starting ID passerelle: 902308
+2025-06-30 17:59:15 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-06-30 17:59:15 [INFO]: [object Object]
+2025-06-30 17:59:15 [INFO]: Nombre de commandes récupérées : 2
+2025-06-30 17:59:15 [INFO]: Génération du fichier XML...
+2025-06-30 17:59:15 [INFO]: dasn cmd exportedOrders :
+2025-06-30 17:59:15 [INFO]: Fichier XML généré et enregistré à : /Users/victorpiamias/Desktop/Dev/winPasserelle/src/exports/orders-export.xml
+2025-06-30 17:59:15 [INFO]: Compression et encodage du fichier XML...
+2025-06-30 17:59:15 [INFO]: Envoi du fichier XML à Winpharma...
+2025-06-30 17:59:15 [INFO]: URL d'envoi: https://sec.winpharma.com/webpasserelle/demande/
+2025-06-30 17:59:16 [INFO]: XML envoyé avec succès à Winpharma.
+2025-06-30 17:59:16 [INFO]: Assigning idPasserelle 902308 to order UUID 21798d9c-9bcc-4047-8010-fca5091cbe04
+2025-06-30 17:59:16 [INFO]: Commande UUID 21798d9c-9bcc-4047-8010-fca5091cbe04 mise à jour avec idPasserelle 902308.
+2025-06-30 17:59:16 [INFO]: Assigning idPasserelle 902309 to order UUID 92aa5350-ca0d-4ac9-973b-68aacd95c1a8
+2025-06-30 17:59:16 [INFO]: Commande UUID 92aa5350-ca0d-4ac9-973b-68aacd95c1a8 mise à jour avec idPasserelle 902309.
+2025-06-30 17:59:16 [INFO]: Déconnexion de Prisma Client.
+2025-06-30 17:59:16 [INFO]: Script terminé.
+2025-07-01 06:26:17 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-07-01 06:26:19 [INFO]: Starting ID passerelle: 902310
+2025-07-01 06:26:19 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-07-01 06:26:19 [INFO]: [object Object]
+2025-07-01 06:26:19 [INFO]: Nombre de commandes récupérées : 14
+2025-07-01 06:26:19 [INFO]: Génération du fichier XML...
+2025-07-01 06:26:19 [INFO]: dasn cmd exportedOrders :
+2025-07-01 06:26:20 [INFO]: Fichier XML généré et enregistré à : /Users/victorpiamias/Desktop/Dev/winPasserelle/src/exports/orders-export.xml
+2025-07-01 06:26:20 [INFO]: Compression et encodage du fichier XML...
+2025-07-01 06:26:20 [INFO]: Envoi du fichier XML à Winpharma...
+2025-07-01 06:26:20 [INFO]: URL d'envoi: https://sec.winpharma.com/webpasserelle/demande/
+2025-07-01 06:26:20 [INFO]: XML envoyé avec succès à Winpharma.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902310 to order UUID 132222c4-551c-4c76-b33a-f0b5e72eaecf
+2025-07-01 06:26:20 [INFO]: Commande UUID 132222c4-551c-4c76-b33a-f0b5e72eaecf mise à jour avec idPasserelle 902310.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902311 to order UUID e2b7fa11-0c85-43bc-8fb6-778dfadabe31
+2025-07-01 06:26:20 [INFO]: Commande UUID e2b7fa11-0c85-43bc-8fb6-778dfadabe31 mise à jour avec idPasserelle 902311.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902312 to order UUID 7bb70cfb-b30c-4d5f-a85a-9e01575db9c5
+2025-07-01 06:26:20 [INFO]: Commande UUID 7bb70cfb-b30c-4d5f-a85a-9e01575db9c5 mise à jour avec idPasserelle 902312.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902313 to order UUID 9ad9b9e7-079c-4146-ad87-d707d2917d07
+2025-07-01 06:26:20 [INFO]: Commande UUID 9ad9b9e7-079c-4146-ad87-d707d2917d07 mise à jour avec idPasserelle 902313.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902314 to order UUID 7aeb96f0-444f-40b0-a534-6b4d5ff61ce6
+2025-07-01 06:26:20 [INFO]: Commande UUID 7aeb96f0-444f-40b0-a534-6b4d5ff61ce6 mise à jour avec idPasserelle 902314.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902315 to order UUID 852cc30d-eeb0-4557-b0eb-96dcaafc7f6e
+2025-07-01 06:26:20 [INFO]: Commande UUID 852cc30d-eeb0-4557-b0eb-96dcaafc7f6e mise à jour avec idPasserelle 902315.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902316 to order UUID 58c4fa10-4448-47b9-b306-3aa9eae59e21
+2025-07-01 06:26:20 [INFO]: Commande UUID 58c4fa10-4448-47b9-b306-3aa9eae59e21 mise à jour avec idPasserelle 902316.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902317 to order UUID 3494ee65-f2ad-4784-9b27-303211aa8fc6
+2025-07-01 06:26:20 [INFO]: Commande UUID 3494ee65-f2ad-4784-9b27-303211aa8fc6 mise à jour avec idPasserelle 902317.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902318 to order UUID ac652ec7-8dce-4f58-a423-8cc109deace3
+2025-07-01 06:26:20 [INFO]: Commande UUID ac652ec7-8dce-4f58-a423-8cc109deace3 mise à jour avec idPasserelle 902318.
+2025-07-01 06:26:20 [INFO]: Assigning idPasserelle 902319 to order UUID ebdc1d37-ea44-4ba5-b540-909534160286
+2025-07-01 06:26:21 [INFO]: Commande UUID ebdc1d37-ea44-4ba5-b540-909534160286 mise à jour avec idPasserelle 902319.
+2025-07-01 06:26:21 [INFO]: Assigning idPasserelle 902320 to order UUID 2a569e61-56df-44d8-b30a-228744c50065
+2025-07-01 06:26:21 [INFO]: Commande UUID 2a569e61-56df-44d8-b30a-228744c50065 mise à jour avec idPasserelle 902320.
+2025-07-01 06:26:21 [INFO]: Assigning idPasserelle 902321 to order UUID f81f7b7f-9c94-4c4d-bc68-1a37d5dbdd48
+2025-07-01 06:26:21 [INFO]: Commande UUID f81f7b7f-9c94-4c4d-bc68-1a37d5dbdd48 mise à jour avec idPasserelle 902321.
+2025-07-01 06:26:21 [INFO]: Assigning idPasserelle 902322 to order UUID 517699fe-e49d-4263-a202-0617dd4ea385
+2025-07-01 06:26:21 [INFO]: Commande UUID 517699fe-e49d-4263-a202-0617dd4ea385 mise à jour avec idPasserelle 902322.
+2025-07-01 06:26:21 [INFO]: Assigning idPasserelle 902323 to order UUID 83f25c9e-38bd-4b5a-9a19-eefafd2fd0bf
+2025-07-01 06:26:21 [INFO]: Commande UUID 83f25c9e-38bd-4b5a-9a19-eefafd2fd0bf mise à jour avec idPasserelle 902323.
+2025-07-01 06:26:21 [INFO]: Déconnexion de Prisma Client.
+2025-07-01 06:26:21 [INFO]: Script terminé.
+2025-07-01 06:29:36 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-07-01 06:29:37 [INFO]: Starting ID passerelle: 902324
+2025-07-01 06:29:37 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-07-01 06:29:38 [INFO]: [object Object]
+2025-07-01 06:29:38 [INFO]: Nombre de commandes récupérées : 1
+2025-07-01 06:29:38 [INFO]: Génération du fichier XML...
+2025-07-01 06:29:38 [INFO]: dasn cmd exportedOrders :
+2025-07-01 06:29:38 [INFO]: Fichier XML généré et enregistré à : /Users/victorpiamias/Desktop/Dev/winPasserelle/src/exports/orders-export.xml
+2025-07-01 06:29:38 [INFO]: Compression et encodage du fichier XML...
+2025-07-01 06:29:38 [INFO]: Envoi du fichier XML à Winpharma...
+2025-07-01 06:29:38 [INFO]: URL d'envoi: https://sec.winpharma.com/webpasserelle/demande/
+2025-07-01 06:29:38 [INFO]: XML envoyé avec succès à Winpharma.
+2025-07-01 06:29:38 [INFO]: Assigning idPasserelle 902315 to order UUID 852cc30d-eeb0-4557-b0eb-96dcaafc7f6e
+2025-07-01 06:29:38 [INFO]: Commande UUID 852cc30d-eeb0-4557-b0eb-96dcaafc7f6e mise à jour avec idPasserelle 902315.
+2025-07-01 06:29:38 [INFO]: Déconnexion de Prisma Client.
+2025-07-01 06:29:38 [INFO]: Script terminé.
+2025-07-01 06:31:14 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-07-01 06:31:14 [INFO]: Starting ID passerelle: 902324
+2025-07-01 06:31:14 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-07-01 06:31:15 [INFO]: [object Object]
+2025-07-01 06:31:15 [INFO]: Nombre de commandes récupérées : 5
+2025-07-01 06:31:15 [INFO]: Génération du fichier XML...
+2025-07-01 06:31:15 [INFO]: dasn cmd exportedOrders :
+2025-07-01 06:31:15 [INFO]: Fichier XML généré et enregistré à : /Users/victorpiamias/Desktop/Dev/winPasserelle/src/exports/orders-export.xml
+2025-07-01 06:31:15 [INFO]: Compression et encodage du fichier XML...
+2025-07-01 06:31:15 [INFO]: Envoi du fichier XML à Winpharma...
+2025-07-01 06:31:15 [INFO]: URL d'envoi: https://sec.winpharma.com/webpasserelle/demande/
+2025-07-01 06:31:15 [INFO]: XML envoyé avec succès à Winpharma.
+2025-07-01 06:31:15 [INFO]: Assigning idPasserelle 902314 to order UUID 7aeb96f0-444f-40b0-a534-6b4d5ff61ce6
+2025-07-01 06:31:16 [INFO]: Commande UUID 7aeb96f0-444f-40b0-a534-6b4d5ff61ce6 mise à jour avec idPasserelle 902314.
+2025-07-01 06:31:16 [INFO]: Assigning idPasserelle 902315 to order UUID 852cc30d-eeb0-4557-b0eb-96dcaafc7f6e
+2025-07-01 06:31:16 [INFO]: Commande UUID 852cc30d-eeb0-4557-b0eb-96dcaafc7f6e mise à jour avec idPasserelle 902315.
+2025-07-01 06:31:16 [INFO]: Assigning idPasserelle 902320 to order UUID 2a569e61-56df-44d8-b30a-228744c50065
+2025-07-01 06:31:16 [INFO]: Commande UUID 2a569e61-56df-44d8-b30a-228744c50065 mise à jour avec idPasserelle 902320.
+2025-07-01 06:31:16 [INFO]: Assigning idPasserelle 902322 to order UUID 517699fe-e49d-4263-a202-0617dd4ea385
+2025-07-01 06:31:16 [INFO]: Commande UUID 517699fe-e49d-4263-a202-0617dd4ea385 mise à jour avec idPasserelle 902322.
+2025-07-01 06:31:16 [INFO]: Assigning idPasserelle 902323 to order UUID 83f25c9e-38bd-4b5a-9a19-eefafd2fd0bf
+2025-07-01 06:31:16 [INFO]: Commande UUID 83f25c9e-38bd-4b5a-9a19-eefafd2fd0bf mise à jour avec idPasserelle 902323.
+2025-07-01 06:31:16 [INFO]: Déconnexion de Prisma Client.
+2025-07-01 06:31:16 [INFO]: Script terminé.
+2025-07-01 06:34:35 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-07-01 06:34:35 [INFO]: Starting ID passerelle: 902323
+2025-07-01 06:34:35 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-07-01 06:34:36 [INFO]: [object Object]
+2025-07-01 06:34:36 [INFO]: Nombre de commandes récupérées : 1
+2025-07-01 06:34:36 [INFO]: Génération du fichier XML...
+2025-07-01 06:34:36 [INFO]: dasn cmd exportedOrders :
+2025-07-01 06:34:36 [INFO]: Fichier XML généré et enregistré à : /Users/victorpiamias/Desktop/Dev/winPasserelle/src/exports/orders-export.xml
+2025-07-01 06:34:36 [INFO]: Compression et encodage du fichier XML...
+2025-07-01 06:34:36 [INFO]: Envoi du fichier XML à Winpharma...
+2025-07-01 06:34:36 [INFO]: URL d'envoi: https://sec.winpharma.com/webpasserelle/demande/
+2025-07-01 06:34:36 [INFO]: XML envoyé avec succès à Winpharma.
+2025-07-01 06:34:36 [INFO]: Assigning idPasserelle 902323 to order UUID 83f25c9e-38bd-4b5a-9a19-eefafd2fd0bf
+2025-07-01 06:34:36 [INFO]: Commande UUID 83f25c9e-38bd-4b5a-9a19-eefafd2fd0bf mise à jour avec idPasserelle 902323.
+2025-07-01 06:34:36 [INFO]: Déconnexion de Prisma Client.
+2025-07-01 06:34:36 [INFO]: Script terminé.
+2025-07-01 06:35:35 [INFO]: Récupération du max idPasserelle depuis Prisma...
+2025-07-01 06:35:36 [INFO]: Starting ID passerelle: 902325
+2025-07-01 06:35:36 [INFO]: Récupération des données des commandes depuis Prisma...
+2025-07-01 06:35:36 [INFO]: [object Object]
+2025-07-01 06:35:36 [INFO]: Nombre de commandes récupérées : 1
+2025-07-01 06:35:36 [INFO]: Génération du fichier XML...
+2025-07-01 06:35:36 [INFO]: dasn cmd exportedOrders :
+2025-07-01 06:35:36 [INFO]: Fichier XML généré et enregistré à : /Users/victorpiamias/Desktop/Dev/winPasserelle/src/exports/orders-export.xml
+2025-07-01 06:35:36 [INFO]: Compression et encodage du fichier XML...
+2025-07-01 06:35:36 [INFO]: Envoi du fichier XML à Winpharma...
+2025-07-01 06:35:36 [INFO]: URL d'envoi: https://sec.winpharma.com/webpasserelle/demande/
+2025-07-01 06:35:37 [INFO]: XML envoyé avec succès à Winpharma.
+2025-07-01 06:35:37 [INFO]: Assigning idPasserelle 902324 to order UUID 83f25c9e-38bd-4b5a-9a19-eefafd2fd0bf
+2025-07-01 06:35:37 [INFO]: Commande UUID 83f25c9e-38bd-4b5a-9a19-eefafd2fd0bf mise à jour avec idPasserelle 902324.
+2025-07-01 06:35:37 [INFO]: Déconnexion de Prisma Client.
+2025-07-01 06:35:37 [INFO]: Script terminé.
